@@ -35,7 +35,7 @@ namespace ATA_Cisco_187
             if (!string.IsNullOrEmpty(FTPPass))
             {
                 textFtpPass.Text = FTPPass;
-            }
+        }
             if (FTPPort != 0)
             {
                 textFtpPort.Text = FTPPort.ToString();
