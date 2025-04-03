@@ -66,7 +66,17 @@ namespace ATA_Cisco_187
         {
             config = new ATAConfig(textServer.Text, textUser.Text, textPass.Text, textMac.Text,
                 ftpServer);
-            config.GenerateFile();
+            config.UploadFile();
+            MessageBox.Show("Configuração enviada com sucesso!");
+            ClearText();
+        }
+
+        private void ClearText()
+        {
+            textServer.Clear();
+            textUser.Clear();
+            textPass.Clear();
+            textMac.Clear();
         }
     }
 }

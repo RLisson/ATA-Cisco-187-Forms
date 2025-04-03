@@ -26,5 +26,40 @@ namespace ATA_Cisco_187
             Mac = mac;
             FTPServer = ftpServer;
         }
+
+        private void GenerateFile()
+        {
+            string content;
+
+            using (StreamReader reader = new StreamReader(file))
+            {
+                content = reader.ReadToEnd();
+            }
+
+            content = content.Replace("SERVER", Server);
+            content = content.Replace("LINE", User);
+            content = content.Replace("PASSWORD", Pass);
+
+            string newFileName = $"ATA{Mac}.cnf.xml";
+            using (StreamWriter writer = new StreamWriter(newFileName))
+            {
+                writer.Write(content);
+            }
+        }
+
+        public bool UploadFile()
+        {
+            try
+            {
+                GenerateFile();
+                Task task = FTPServer.Upload($"ATA{Mac}.cnf.xml");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return false;
+            }
+        }
     }
 }
